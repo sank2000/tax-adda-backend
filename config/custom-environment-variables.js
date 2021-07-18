@@ -9,5 +9,11 @@
 module.exports = {
 	host: 'HOST',
 	port: 'PORT',
-	logRequests: 'VERBOSE_REQ_LOGGING'
+	logRequests: 'VERBOSE_REQ_LOGGING',
+	DB_SERVER:
+		process.env.NODE_ENV === 'production'
+			? 'DB_SERVER_PROD'
+			: process.env.NODE_ENV === 'test'
+			? 'DB_SERVER_TEST'
+			: 'DB_SERVER_DEV'
 };
