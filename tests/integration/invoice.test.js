@@ -1,7 +1,7 @@
 import request from 'supertest';
 
 import { Invoice } from '@models';
-import invoices from './constants/invoice';
+import invoices from '../../src/constants/invoice';
 
 let server;
 

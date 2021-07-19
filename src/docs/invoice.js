@@ -1,7 +1,7 @@
 import j2s from 'joi-to-swagger';
 
 import { invoiceSchema, validateUpdateSchema } from '@models';
-import invoice from 'tests/integration/constants/invoice';
+import invoice from 'src/constants/invoice';
 
 const { swagger: invoiceSchemaGen } = j2s(invoiceSchema);
 const { swagger: validateUpdateSchemaGen } = j2s(validateUpdateSchema);
