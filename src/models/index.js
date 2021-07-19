@@ -1,1 +1,6 @@
-export { default as Invoice, validateInvoice } from './invoice';
+export {
+	default as Invoice,
+	validateInvoice,
+	validateGetInvoice,
+	validateUpdateInvoice
+} from './invoice';

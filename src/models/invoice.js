@@ -42,3 +42,22 @@ export const validateInvoice = data => {
 
 	return schema.validate(data);
 };
+
+export const validateUpdateInvoice = data => {
+	const schema = Joi.object({
+		id: Joi.string().required(),
+		amount: Joi.number().required()
+	});
+
+	return schema.validate(data);
+};
+
+export const validateGetInvoice = data => {
+	const schema = Joi.object({
+		type: Joi.string().required().valid('all', 'expired').required().messages({
+			'any.only': '{{#label}} must be valid'
+		})
+	});
+
+	return schema.validate(data);
+};

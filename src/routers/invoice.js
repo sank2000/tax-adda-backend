@@ -1,17 +1,19 @@
 import { Router } from 'express';
-import { createInvoice } from '@controllers/invoice';
+import { createInvoice, getInvoice, updateInvoice } from '@controllers/invoice';
 
 import { validateBody } from 'src/helpers';
-import { validateInvoice } from '@models';
+import { validateInvoice, validateUpdateInvoice, validateGetInvoice } from '@models';
 
 const router = Router();
 
 /**
  * Router for /ping routes
  *
- * Available routes: /new
+ * Available routes: /
  */
 
-router.post('/new', validateBody(validateInvoice), createInvoice);
+router.post('/', validateBody(validateInvoice), createInvoice);
+router.get('/:type', validateBody(validateGetInvoice, true), getInvoice);
+router.put('/', validateBody(validateUpdateInvoice), updateInvoice);
 
 export default router;
