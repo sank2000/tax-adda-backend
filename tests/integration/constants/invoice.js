@@ -6,7 +6,7 @@ const invoice = [
 		email: 'santhoshvelr@gmail.com',
 		phoneNumber: '8638394728',
 		address: {
-			area: '!71/9,kallanguthu',
+			area: '171/9,Street',
 			district: 'salem',
 			pin_code: 636102
 		},
@@ -20,14 +20,34 @@ const invoice = [
 		item: [
 			{
 				name: 'laptop',
-				price: 30,
-				qty: 5
+				price: 5000,
+				quantity: 1
 			}
 		],
 		status: 'not paid',
 		note: 'check book',
-		dueDate: '2022-07-02',
+		dueDate: '2021-07-02',
 		amountPaid: 0
+	},
+	{
+		name: 'san2',
+		email: 'santhoshvelr@gmail.com',
+		phoneNumber: '8638394728',
+		address: {
+			area: '!71/9,kallanguthu',
+			district: 'salem',
+			pin_code: 636102
+		},
+		task: [
+			{
+				name: 'backend',
+				rate: 30,
+				hours: 5
+			}
+		],
+		status: 'not paid',
+		note: 'gPay',
+		dueDate: new Date(new Date().setDate(new Date().getDate() + 1)),
 	}
 ];
 
