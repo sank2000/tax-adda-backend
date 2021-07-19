@@ -1,5 +1,10 @@
+import 'dotenv/config';
+import config from 'config';
+
 import { Invoice } from '@models';
 import { sendFailure, sendSuccess } from 'src/helpers';
+import transporter from 'src/mailConnection';
+import logger from '@tools/logging';
 
 /**
  *
@@ -17,6 +22,25 @@ export const createInvoice = async (req, res) => {
 
 	const invoice = new Invoice({ ...body });
 	await invoice.save();
+
+	let mailOptions = {
+		from: `"TAX ADDA" ${config.get('MAIL_USER_NAME')}`,
+		to: invoice.email,
+		subject: 'New Invoice',
+		html: `
+    <h5>Hello ${invoice.name}</h5>
+    <p>New Invoice added to your account</p>
+    <p>Invoice ID : ${invoice._id} </p>
+`
+	};
+
+	try {
+		if (process.env.NODE_ENV !== 'test') {
+			await transporter.sendMail(mailOptions);
+		}
+	} catch (err) {
+		logger.error(err);
+	}
 
 	return sendSuccess(res, { message: 'Invoice created successfully', data: invoice });
 };

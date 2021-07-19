@@ -10,6 +10,8 @@ module.exports = {
 	host: 'HOST',
 	port: 'PORT',
 	logRequests: 'VERBOSE_REQ_LOGGING',
+	MAIL_USER_NAME: 'MAIL_USER_NAME',
+	MAIL_PASSWORD: 'MAIL_PASSWORD',
 	DB_SERVER:
 		process.env.NODE_ENV === 'production'
 			? 'DB_SERVER_PROD'
