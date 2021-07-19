@@ -1,6 +1,7 @@
 import 'express-async-errors';
-import { StatusCodes } from 'http-status-codes';
-import { PingRouter } from '@routers';
+
+import { PingRouter, InvoiceRouter } from '@routers';
+import { errorHandler } from 'src/middlewares';
 
 /**
  * Registers all routes and handles server errors.
@@ -8,12 +9,7 @@ import { PingRouter } from '@routers';
 
 export default function registerRouters(app) {
 	app.use('/ping', PingRouter);
+	app.use('/invoice', InvoiceRouter);
 
-	app.use((err, _req, res, next) => {
-		res
-			.status(StatusCodes.INTERNAL_SERVER_ERROR)
-			.send('Something went wrong from our side. Please try again after some time.');
-
-		next(err);
-	});
+	app.use(errorHandler);
 }
