@@ -21,35 +21,43 @@ const InvoiceSchema = new Schema(
 
 export default model('invoice', InvoiceSchema);
 
-export const validateInvoice = data => {
-	const schema = Joi.object({
+export const invoiceSchema = Joi.object({
+	name: Joi.string().required(),
+	address: Joi.object().required(),
+	phoneNumber: Joi.number().min(4444444444).max(9999999999).required().messages({
+		'number.min': '"Phone number" must be valid',
+		'number.max': '"Phone number" must be valid'
+	}),
+	email: Joi.string()
+		.email({ tlds: { allow: false } })
+		.required(),
+	task: Joi.array().required().items({
 		name: Joi.string().required(),
-		address: Joi.object().required(),
-		phoneNumber: Joi.number().min(4444444444).max(9999999999).required().messages({
-			'number.min': '"Phone number" must be valid',
-			'number.max': '"Phone number" must be valid'
-		}),
-		email: Joi.string()
-			.email({ tlds: { allow: false } })
-			.required(),
-		task: Joi.array().required(),
-		item: Joi.array(),
-		status: Joi.string(),
-		note: Joi.string(),
-		dueDate: Joi.date(),
-		amountPaid: Joi.number()
-	});
+		rate: Joi.number().required(),
+		hours: Joi.number().required()
+	}),
+	item: Joi.array().items({
+		name: Joi.string().required(),
+		price: Joi.number().required(),
+		quantity: Joi.number().required()
+	}),
+	status: Joi.string(),
+	note: Joi.string(),
+	dueDate: Joi.date(),
+	amountPaid: Joi.number()
+});
 
-	return schema.validate(data);
+export const validateInvoice = data => {
+	return invoiceSchema.validate(data);
 };
 
-export const validateUpdateInvoice = data => {
-	const schema = Joi.object({
-		id: Joi.string().required(),
-		amount: Joi.number().required()
-	});
+export const validateUpdateSchema = Joi.object({
+	id: Joi.string().required(),
+	amount: Joi.number().required()
+});
 
-	return schema.validate(data);
+export const validateUpdateInvoice = data => {
+	return validateUpdateSchema.validate(data);
 };
 
 export const validateGetInvoice = data => {

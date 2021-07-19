@@ -1,6 +1,8 @@
 export {
 	default as Invoice,
 	validateInvoice,
+	invoiceSchema,
 	validateGetInvoice,
-	validateUpdateInvoice
+	validateUpdateInvoice,
+	validateUpdateSchema
 } from './invoice';
