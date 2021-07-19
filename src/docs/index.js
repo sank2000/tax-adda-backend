@@ -1,3 +1,4 @@
-import pingDocs from './ping.docs';
+import pingDocs from './ping';
+import invoiceDocs from './invoice';
 
-export default { ...pingDocs };
+export default { ...pingDocs, ...invoiceDocs };
